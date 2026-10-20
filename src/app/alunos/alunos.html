@@ -1,0 +1,104 @@
+
+<section class="pagina">
+  <h1>Cadastro de Alunos</h1>
+  <p class="subtitulo">Cadastre e gerencie os alunos.</p>
+
+  <form class="formulario" (ngSubmit)="cadastrarAluno()">
+    <div class="campo">
+      <label for="nome">Nome completo</label>
+      <input
+        id="nome"
+        name="nome"
+        type="text"
+        [(ngModel)]="aluno.nome"
+        placeholder="Digite o nome completo"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="matricula">Matrícula</label>
+      <input
+        id="matricula"
+        name="matricula"
+        type="text"
+        [(ngModel)]="aluno.matricula"
+        placeholder="Ex.: 2026001"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="email">E-mail</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        [(ngModel)]="aluno.email"
+        placeholder="aluno@email.com"
+        required
+      />
+    </div>
+
+    <div class="campo">
+      <label for="curso">Curso</label>
+      <select
+        id="curso"
+        name="curso"
+        [(ngModel)]="aluno.curso"
+        required
+      >
+        <option value="" disabled>Selecione um curso</option>
+        @for (curso of cursos; track curso) {
+          <option [value]="curso">{{ curso }}</option>
+        }
+      </select>
+    </div>
+
+    <button class="botao-cadastrar" type="submit">
+      Cadastrar aluno
+    </button>
+  </form>
+
+  <section class="lista-alunos">
+    <h2>Alunos cadastrados</h2>
+
+    @if (alunos.length === 0) {
+      <p class="vazio">Nenhum aluno cadastrado ainda.</p>
+    } @else {
+      <div class="tabela-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Matrícula</th>
+              <th>Nome</th>
+              <th>E-mail</th>
+              <th>Curso</th>
+              <th>Ação</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (aluno of alunos; track aluno.matricula) {
+              <tr>
+                <td>{{ aluno.matricula }}</td>
+                <td>{{ aluno.nome }}</td>
+                <td>{{ aluno.email }}</td>
+                <td>{{ aluno.curso }}</td>
+                <td>
+                  <button
+                    type="button"
+                    class="botao-excluir"
+                    (click)="excluirAluno(aluno.matricula)"
+                  >
+                    Excluir
+                  </button>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
+</section>

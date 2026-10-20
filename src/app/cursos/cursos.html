@@ -1,0 +1,34 @@
+
+<section class="pagina">
+  <h1>Nossos Cursos</h1>
+  <p class="subtitulo">
+    Confira os cursos disponíveis no portal.
+  </p>
+
+  <div class="grade-cursos">
+    @for (curso of cursos; track curso.id) {
+      <article class="card-curso">
+        <div class="icone-curso">
+          <span>{{ curso.id }}</span>
+        </div>
+
+        <span
+          class="situacao"
+          [class.ativo]="curso.situacao === 'Ativo'"
+          [class.inativo]="curso.situacao === 'Inativo'"
+        >
+          {{ curso.situacao }}
+        </span>
+
+        <h2>{{ curso.nome }}</h2>
+
+        <p class="descricao">{{ curso.descricao }}</p>
+
+        <div class="rodape-card">
+          <span>Carga horária</span>
+          <strong>{{ curso.cargaHoraria }} horas</strong>
+        </div>
+      </article>
+    }
+  </div>
+</section>
